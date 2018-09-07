@@ -1,4 +1,6 @@
 from tornado.web import RequestHandler
+import config
+import os
 
 
 class IndexHandler(RequestHandler):
@@ -43,6 +45,48 @@ class ZhangmanyuHandler(RequestHandler):
         print(a, b, c)
         self.write("zhangmanyu")
 
+
+class PostFileHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+        self.render('postfile.html')
+
+    def post(self, *args, **kwargs):
+        username = self.get_body_argument("username")
+        password = self.get_body_argument("password")
+        hobby = self.get_body_arguments("hobby")
+        print(username, password, hobby)
+        self.write("post")
+
+
+class ZhuyinHandler(RequestHandler):
+
+    def get(self, *args, **kwargs):
+        print(self.request.method)
+        print(self.request.host)
+        print(self.request.uri)
+        print(self.request.path)
+        print(self.request.query)
+        print(self.request.version)
+        print(self.request.headers)
+        print(self.request.body)
+        print(self.request.remote_ip)
+        print(self.request.files)
+        self.write("获取请求参数")
+
+
+class UpfileHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+        self.render('upfile.html')
+
+    def post(self, *args, **kwargs):
+        filesDict = self.request.files
+        for inputname in filesDict:
+            fileArr = filesDict[inputname]
+            for fileObj in fileArr:
+                filePath = os.path.join(config.BASE_DIRS, 'upfile/', fileObj.filename)
+                with open(filePath, 'wb') as f:
+                    f.write(fileObj.body)
+        self.write("ok")
 
 
 import json
