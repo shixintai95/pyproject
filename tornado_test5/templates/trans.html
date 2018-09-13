@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>trans</title>
+</head>
+<body>
+    <!--只能关闭一行-->
+    <!--{% raw str%}-->
+
+    <!--关闭当前页面所有的转义语句-->
+    {% autoescape None %}
+    {{str}}
+
+    <!--对已经关闭了整个转义的页面，有选择的开启-->
+    {{escape(str)}}
+
+    {{str}}
+
+</body>
+</html>

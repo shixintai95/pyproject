@@ -11,6 +11,7 @@ class Application(web.Application):
     def __init__(self):
         handlers = [
             # (r'/', index.IndexHandler),
+            (r'/jsontest', index.JsonHandler),
             # 渲染
             (r'/home', index.HomeHandler),
             # 转义

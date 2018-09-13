@@ -71,3 +71,19 @@ class StudentHandler(RequestHandler):
         # self.application.db.insert("insert into students(name,age) values('uzi','21')")
         # self.write("ok")
         self.render("student.html", stus=stus)
+
+import json
+class JsonHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+        jsonobj = [
+            {
+                "name": "zhangsan",
+                "age": 22
+            },
+            {
+                "name": "lisi",
+                "age": 33
+            }
+        ]
+        jsontest = json.dumps(jsonobj)
+        self.render("jsontest.html", jsontest=jsontest)
