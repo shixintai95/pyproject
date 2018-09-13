@@ -16,6 +16,7 @@ def getCoroutine(func):
         gen1 = func()
         # longIo的生成器
         gen2 = next(gen1)
+
         def run(g):
             res = next(g)
             try:
